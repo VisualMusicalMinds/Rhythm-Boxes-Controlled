@@ -373,7 +373,32 @@ cells.forEach((cell, idx) => {
   cell.addEventListener("click", function() {
     // Don't overwrite if clicking to remove a box:
     if (cell.dataset.permanent && selectedLength === null) return;
-       
+
+    // ---- RHYTHM PLACEMENT RULES ----
+    // For quarter note (length 4, green): only boxes 1,5,9,13 (indices 0,4,8,12)
+    if (
+      selectedLength === 4 &&
+      selectedColor === "green" &&
+      ![0,4,8,12].includes(idx)
+    ) {
+      grid.classList.add("shake");
+      setTimeout(() => grid.classList.remove("shake"), 300);
+      return;
+    }
+
+    // For eighth note (length 2, orange): not on even boxes (musical: 2,4,6,...,16, i.e. indices 1,3,5,...,15)
+    if (
+      selectedLength === 2 &&
+      selectedColor === "orange" &&
+      [1,3,5,7,9,11,13,15].includes(idx)
+    ) {
+      grid.classList.add("shake");
+      setTimeout(() => grid.classList.remove("shake"), 300);
+      return;
+    }
+
+    // 16th note (length 1, purple): no extra rule
+
     // === SHAKING IF IT WON'T FIT ===
     if (
       selectedLength && selectedColor &&
