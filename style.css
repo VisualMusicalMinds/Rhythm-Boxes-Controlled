@@ -144,7 +144,6 @@ body {
   touch-action: none;
 }
 
-/* Override controls-row styling */
 .controls-row {
   display: flex;
   justify-content: center;
@@ -153,97 +152,18 @@ body {
   margin-top: 1vw;
   width: 80%;
   flex-wrap: wrap;
-}
-
-/* Hide any leftover labels for tempoInput */
-label[for="tempoInput"] {
-  display: none;
-}
-
-.controls-row button {
-  font-size: 1em;
-  border-radius: 0.4vw;
-  padding: 0.3vw 1vw;
-  border: 1px solid #bbb;
-  background: #fafafa;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.controls-row button:hover {
-  background: #e6f7ff;
-}
-.volume-row {
-  margin-top: 1vw;
-  font-size: 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1vw;
-  width: 80%;
-}
-.volume-row input[type="range"] {
-  width: 8vw;
-  min-width: 50px;
-  max-width: 200px;
-}
-@media (max-width: 700px) {
-  .rhythm-app-container { aspect-ratio: 1/2; }
-  .grid { height: 28vw; }
-  .library img { width: 16vw; }
-}
-.draggable.selected {
-  outline: 3px solid #0af;
-  box-shadow: 0 0 8px #0af;
-}
-@keyframes shake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-8px); }
-  40% { transform: translateX(8px); }
-  60% { transform: translateX(-8px); }
-  80% { transform: translateX(8px); }
-  100% { transform: translateX(0); }
-}
-
-.shake {
-  animation: shake 0.3s !important;
-}
-.sound-mode-row {
-  display: flex;
-  align-items: center;
-  gap: 1vw;
-  margin-top: 1vw;
   font-size: 1em;
 }
-#pitchSelector {
+
+/* Show BPM label inline */
+.controls-row label[for="tempoInput"] {
+  display: inline-block;
   font-size: 1em;
-  margin-left: 1vw;
+  margin-right: 0.4em;
+  color: #333;
 }
 
-/* BPM Input Styling (matching boomwhacker-builder) */
-.bpm-input-block { 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 10px;
-}
-
-.bpm-input-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-input[type="number"].bpm-input::-webkit-inner-spin-button,
-input[type="number"].bpm-input::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-
-input[type="number"].bpm-input[type=number] { 
-  -moz-appearance: textfield; 
-}
-
+/* BPM input and buttons */
 input[type="number"].bpm-input {
   width: 60px;
   font-size: 1.2em;
@@ -260,36 +180,100 @@ input[type="number"].bpm-input {
   transition: border 0.14s;
 }
 
-input[type="number"].bpm-input:focus {
-  border-color: #135ba1;
+/* Remove default spinner arrows for custom controls */
+input[type="number"].bpm-input::-webkit-inner-spin-button,
+input[type="number"].bpm-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"].bpm-input {
+  -moz-appearance: textfield;
 }
 
-.bpm-stepper { 
-  display: flex;
-  flex-direction: column;
-  user-select: none;
-  height: 34px;
-  justify-content: center;
-  gap: 2px;
-}
-
+/* BPM up/down arrow buttons */
 .bpm-arrow {
   width: 23px;
-  height: 16px;
+  height: 20px;
   font-size: 1.0em;
   border: none;
   background: none;
   color: #1976d2;
   cursor: pointer;
   padding: 0;
-  margin: 0 auto;
+  margin: 0 0.1em;
   border-radius: 3px;
   line-height: 1;
   transition: background 0.15s, color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+.bpm-arrow:active,
+.bpm-arrow:focus-visible {
+  color: #135ba1;
+  background: #e3eafd;
 }
 
-.bpm-arrow:active, 
-.bpm-arrow:focus-visible { 
-  color: #135ba1; 
-  background: #e3eafd; 
+/* Style play/clear buttons */
+.controls-row button:not(.bpm-arrow) {
+  font-size: 1em;
+  border-radius: 0.4vw;
+  padding: 0.3vw 1vw;
+  border: 1px solid #bbb;
+  background: #fafafa;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.controls-row button:not(.bpm-arrow):hover {
+  background: #e6f7ff;
+}
+
+.volume-row {
+  margin-top: 1vw;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+  width: 80%;
+}
+.volume-row input[type="range"] {
+  width: 8vw;
+  min-width: 50px;
+  max-width: 200px;
+}
+
+@media (max-width: 700px) {
+  .rhythm-app-container { aspect-ratio: 1/2; }
+  .grid { height: 28vw; }
+  .library img { width: 16vw; }
+  .controls-row { font-size: 1em; }
+  input[type="number"].bpm-input { font-size: 1em; width: 40px; }
+  .bpm-arrow { width: 18px; height: 18px; font-size: 0.9em; }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.3s !important;
+}
+
+.sound-mode-row {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  margin-top: 1vw;
+  font-size: 1em;
+}
+#pitchSelector {
+  font-size: 1em;
+  margin-left: 1vw;
 }
