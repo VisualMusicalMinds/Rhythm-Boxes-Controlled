@@ -219,3 +219,88 @@ body {
   font-size: 1em;
   margin-left: 1vw;
 }
+/* BPM Input Styling (matching boomwhacker-builder) */
+.bpm-input-block { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.bpm-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+input[type="number"].bpm-input::-webkit-inner-spin-button,
+input[type="number"].bpm-input::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type="number"].bpm-input[type=number] { 
+  -moz-appearance: textfield; 
+}
+
+input[type="number"].bpm-input {
+  width: 60px;
+  font-size: 1.2em;
+  border: 1.5px solid #1976d2;
+  border-radius: 6px;
+  outline: none;
+  text-align: center;
+  background: #fafdff;
+  margin: 0 2px;
+  padding: 6px 0 6px 0;
+  height: 34px;
+  box-sizing: border-box;
+  appearance: textfield;
+  transition: border 0.14s;
+}
+
+input[type="number"].bpm-input:focus {
+  border-color: #135ba1;
+}
+
+.bpm-stepper { 
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  height: 34px;
+  justify-content: center;
+  gap: 2px;
+}
+
+.bpm-arrow {
+  width: 23px;
+  height: 16px;
+  font-size: 1.0em;
+  border: none;
+  background: none;
+  color: #1976d2;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 auto;
+  border-radius: 3px;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s;
+}
+
+.bpm-arrow:active, 
+.bpm-arrow:focus-visible { 
+  color: #135ba1; 
+  background: #e3eafd; 
+}
+
+/* Update controls row to accommodate new BPM input */
+.controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1vw;
+  width: 80%;
+  flex-wrap: wrap;
+}
