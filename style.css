@@ -8,7 +8,7 @@ html, body {
 body {
   width: 100vw;
   height: 100vh;
-  background: #fff; /* PURE WHITE */
+  background: #fff;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -22,7 +22,7 @@ body {
   height: 95vh;
   max-width: 98vw;
   max-height: 95vh;
-  background: #fff; /* PURE WHITE */
+  background: #fff;
   border-radius: 12px;
   box-shadow: 0 0 12px #0002;
   display: flex;
@@ -53,7 +53,7 @@ body {
   max-width: 98vw;
   height: 22vw;
   max-height: 35vh;
-  background: #fff; /* PURE WHITE */
+  background: #fff;
   border-radius: 0.5vw;
   box-shadow: 0 2px 8px #0001;
   padding: 1vw 0;
@@ -72,7 +72,7 @@ body {
   height: 100%;
   min-width: 0;
   min-height: 0;
-  gap: 0; /* No gap between image and box */
+  gap: 0;
   justify-content: stretch;
 }
 
@@ -144,26 +144,33 @@ body {
   touch-action: none;
 }
 
+/* --- CONTROLS ROW --- */
 .controls-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 1em;
   margin-top: 1vw;
   width: 80%;
   flex-wrap: wrap;
   font-size: 1em;
 }
 
-/* Show BPM label inline */
+/* --- BPM COMPACT GROUP --- */
+.bpm-group {
+  display: flex;
+  align-items: center;
+  gap: 0.2em; /* Tight spacing */
+}
+
+/* Label for BPM */
 .controls-row label[for="tempoInput"] {
-  display: inline-block;
   font-size: 1em;
   margin-right: 0.4em;
   color: #333;
 }
 
-/* BPM input and buttons */
+/* BPM input styling */
 input[type="number"].bpm-input {
   width: 60px;
   font-size: 1.2em;
@@ -172,15 +179,15 @@ input[type="number"].bpm-input {
   outline: none;
   text-align: center;
   background: #fafdff;
-  margin: 0 2px;
-  padding: 6px 0 6px 0;
+  padding: 6px 0;
   height: 34px;
   box-sizing: border-box;
   appearance: textfield;
   transition: border 0.14s;
+  margin: 0;
 }
 
-/* Remove default spinner arrows for custom controls */
+/* Hide native spinners */
 input[type="number"].bpm-input::-webkit-inner-spin-button,
 input[type="number"].bpm-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -190,29 +197,29 @@ input[type="number"].bpm-input {
   -moz-appearance: textfield;
 }
 
-/* BPM up/down arrow buttons */
+/* BPM ARROW BUTTONS */
 .bpm-arrow {
-  width: 23px;
-  height: 20px;
-  font-size: 1.0em;
-  border: none;
-  background: none;
+  width: 28px;
+  height: 34px;
+  font-size: 1.1em;
+  border: 1.5px solid #1976d2;
+  background: #fafdff;
   color: #1976d2;
   cursor: pointer;
+  border-radius: 6px;
+  margin: 0;
   padding: 0;
-  margin: 0 0.1em;
-  border-radius: 3px;
-  line-height: 1;
-  transition: background 0.15s, color 0.15s;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  vertical-align: middle;
+  transition: background 0.15s, color 0.15s, border 0.14s;
+  box-sizing: border-box;
 }
 .bpm-arrow:active,
 .bpm-arrow:focus-visible {
   color: #135ba1;
   background: #e3eafd;
+  border-color: #135ba1;
 }
 
 /* Style play/clear buttons */
@@ -250,7 +257,7 @@ input[type="number"].bpm-input {
   .library img { width: 16vw; }
   .controls-row { font-size: 1em; }
   input[type="number"].bpm-input { font-size: 1em; width: 40px; }
-  .bpm-arrow { width: 18px; height: 18px; font-size: 0.9em; }
+  .bpm-arrow { width: 20px; height: 28px; font-size: 0.9em; }
 }
 
 @keyframes shake {
