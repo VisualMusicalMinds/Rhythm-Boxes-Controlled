@@ -143,24 +143,23 @@ body {
   user-select: none;
   touch-action: none;
 }
+
+/* Override controls-row styling */
 .controls-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1vw;
+  gap: 12px;
   margin-top: 1vw;
   width: 80%;
   flex-wrap: wrap;
-  font-size: 1em;
 }
-.controls-row label {
-  font-size: 1em;
+
+/* Hide any leftover labels for tempoInput */
+label[for="tempoInput"] {
+  display: none;
 }
-.controls-row input[type="number"] {
-  width: 4em;
-  text-align: center;
-  font-size: 1em;
-}
+
 .controls-row button {
   font-size: 1em;
   border-radius: 0.4vw;
@@ -219,6 +218,7 @@ body {
   font-size: 1em;
   margin-left: 1vw;
 }
+
 /* BPM Input Styling (matching boomwhacker-builder) */
 .bpm-input-block { 
   display: flex;
@@ -292,15 +292,4 @@ input[type="number"].bpm-input:focus {
 .bpm-arrow:focus-visible { 
   color: #135ba1; 
   background: #e3eafd; 
-}
-
-/* Update controls row to accommodate new BPM input */
-.controls-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-top: 1vw;
-  width: 80%;
-  flex-wrap: wrap;
 }
