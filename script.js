@@ -204,9 +204,6 @@ function startPlaybackLoop() {
 }
 
 // ---- PLAY/STOP BUTTON ----
-// Remove click event to prevent double triggers
-// document.getElementById("playButton").addEventListener("click", togglePlay);
-
 const playButton = document.getElementById("playButton");
 
 // Desktop: start instantly on press
@@ -453,4 +450,61 @@ document.addEventListener('click', (event) => {
       cell.classList.remove("green-primary", "green-secondary", "orange-primary", "orange-secondary", "purple");
     }
   });
+});
+
+// ---- BPM UP/DOWN CONTROLS ----
+document.addEventListener("DOMContentLoaded", function() {
+  // Add BPM arrow button listeners
+  let bpmHoldInterval = null, bpmHoldTimeout = null;
+  
+  function stepBpm(dir) {
+    const tempoInput = document.getElementById("tempoInput");
+    let v = parseInt(tempoInput.value, 10);
+    if (isNaN(v)) v = 60;
+    v = Math.max(30, Math.min(300, v + dir));
+    tempoInput.value = v;
+    bpm = v;
+    
+    if (isPlaying) {
+      clearInterval(interval);
+      startPlaybackLoop();
+    }
+  }
+  
+  function startHold(dir) {
+    stepBpm(dir);
+    bpmHoldTimeout = setTimeout(() => {
+      bpmHoldInterval = setInterval(() => stepBpm(dir), 60);
+    }, 500);
+  }
+  
+  function stopHold() {
+    clearTimeout(bpmHoldTimeout);
+    clearInterval(bpmHoldInterval);
+    bpmHoldTimeout = null;
+    bpmHoldInterval = null;
+  }
+  
+  const bpmUp = document.getElementById('bpmUp');
+  const bpmDown = document.getElementById('bpmDown');
+  
+  if (bpmUp) {
+    bpmUp.addEventListener('mousedown', e => { startHold(+1); });
+    bpmUp.addEventListener('touchstart', e => { e.preventDefault(); startHold(+1); }, {passive: false});
+    bpmUp.addEventListener('mouseup', stopHold);
+    bpmUp.addEventListener('mouseleave', stopHold);
+    bpmUp.addEventListener('touchend', stopHold);
+    bpmUp.addEventListener('touchcancel', stopHold);
+    bpmUp.addEventListener('click', function() { stepBpm(+1); });
+  }
+  
+  if (bpmDown) {
+    bpmDown.addEventListener('mousedown', e => { startHold(-1); });
+    bpmDown.addEventListener('touchstart', e => { e.preventDefault(); startHold(-1); }, {passive: false});
+    bpmDown.addEventListener('mouseup', stopHold);
+    bpmDown.addEventListener('mouseleave', stopHold);
+    bpmDown.addEventListener('touchend', stopHold);
+    bpmDown.addEventListener('touchcancel', stopHold);
+    bpmDown.addEventListener('click', function() { stepBpm(-1); });
+  }
 });
